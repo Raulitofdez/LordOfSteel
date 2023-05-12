@@ -79,7 +79,9 @@ package lordofsteel;
     }
 
     public int getPa() {
-        return pa;
+        
+         return pa;   
+        
     }
 
     public int getPe() {
@@ -141,8 +143,18 @@ package lordofsteel;
     public void restauraPS(){
         this.ps =(int)(this.ps * 1.10);
     }
-    public metodo(Dau d1, Dau d2, Dau d3){
-        d1.llencar()
+    public boolean AtacPaReduida(Dau... d){
+        for (int i=0; i<=2; i++){
+            if(d[i].llencar()<=pa/2){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        
+        
     }
+                   
    }
 
