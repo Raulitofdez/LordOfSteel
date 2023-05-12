@@ -23,7 +23,25 @@ package lordofsteel;
     protected int pa;  // Probabilitat d'atac
     protected int pe;  // Probabilitat d'esquivar
 
-    
+    //Nivell personatge
+    protected int pex; // Punts d'experiència
+    protected int niv; // Nivell
+    protected int calcularLlindarNivell(int nivell) {
+        switch (nivell) {
+            case 1:
+                return 100;
+            case 2:
+                return 200;
+            case 3:
+                return 500;
+            case 4:
+                return 1000;
+            case 5:
+                return 2000;
+            default:
+                return 0; // Si no es troba un llindar per al nivell especificat, retorna 0 o gestiona l'error segons convingui
+        }
+    }
     // Arma
     protected Arma arma;
 
@@ -140,6 +158,20 @@ package lordofsteel;
     public void setNom(String nom) {
         this.nom = nom;
     }
+    public int getPex() {
+        return pex;
+    }
+
+    public void setPex(int pex) {
+        this.pex = pex;
+    }
+    public int getNiv() {
+        return niv;
+    }
+
+    public void setNiv(int niv) {
+        this.pex = niv;
+    }
     public void restauraPS(){
         this.ps =(int)(this.ps * 1.10);
     }
@@ -148,13 +180,23 @@ package lordofsteel;
             if(d[i].llencar()<=pa/2){
                 return true;
             }
-            else{
-                return false;
-            }
+           
         }
-        
-        
+        return false;
     }
-                   
+     public void pujarNivell() {
+        niv++;
+        // Sumar un punt addicional a les estadístiques
+        calculaEstadistiquesSecundaries();
+    }
+    
+        public void guanyaCombat(int pexGuanyats) {
+        pex += pexGuanyats;
+        
+        // Comprovar si es supera el llindar del nivell actual
+        if (pex >= calcularLlindarNivell(getNiv() + 1)) {
+            pujarNivell();
+        }
+    }          
    }
 

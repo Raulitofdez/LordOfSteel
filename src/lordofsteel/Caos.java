@@ -9,5 +9,5 @@ package lordofsteel;
  * @author raulf
  */
 public interface Caos {
-    public void RestauraPS();
+    public boolean AtacPaReduida(Dau ... d);
 }
