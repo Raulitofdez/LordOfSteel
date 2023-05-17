@@ -13,5 +13,21 @@ package lordofsteel;
    public HumaCaos(String nom, int forca, int constitucio, int velocitat, int intelligencia, int sort, Arma arma){
         super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);      
 }
+    @Override
+    public boolean atacPAReduida(Dau... dados) {
+        int sum = 0;
+        for (Dau dau : dados) {
+            sum += dau.llencar();
+        }
+
+        int paReducida = getPa() / 2;
+
+        return sum > paReducida;
+    }
+
+    @Override
+    public boolean AtacPaReduida(Dau... d) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 

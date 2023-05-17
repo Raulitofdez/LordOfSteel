@@ -9,9 +9,9 @@ package lordofsteel;
  * @author raulf
  */
    
-   public class Personatge {
+   public abstract class Personatge {
 
-     protected int forca;
+    protected int forca;
     protected int constitucio;
     protected int velocitat;
     protected int intelligencia;
@@ -25,7 +25,7 @@ package lordofsteel;
 
     //Nivell personatge
     protected int pex; // Punts d'experiència
-    protected int niv; // Nivell
+    protected int nivell; // Nivell
     protected int calcularNivell(int nivell) {
         switch (nivell) {
             case 1:
@@ -165,37 +165,67 @@ package lordofsteel;
     public void setPex(int pex) {
         this.pex = pex;
     }
-    public int getNiv() {
-        return niv;
+    public int getNivell() {
+        return nivell;
     }
 
-    public void setNiv(int niv) {
-        this.pex = niv;
+    public void setNivell(int nivell) {
+        this.nivell = nivell;
     }
     public void restauraPS(){
         this.ps =(int)(this.ps * 1.10);
     }
-    public boolean AtacPaReduida(Dau... d){
-        for (int i=0; i<=2; i++){
-            if(d[i].llencar()<=pa/2){
-                return true;
-            }
-           
+    public void subirDeNivel() {
+        this.nivell++;
+        this.constitucio++;
+        this.forca++;
+        this.intelligencia++;
+        this.sort++;
+        this.velocitat++;
+        if (this.nivell == 1) {
+            this.pex -= 100;
+        } else if (this.nivell == 1) {
+            this.pex -= 200;
+        } else if (this.nivell == 2) {
+            this.pex -= 500;
+        } else if (this.nivell == 3) {
+            this.pex -= 1000;
+        } else if (this.nivell == 4) {
+            this.pex -= 2000;
         }
-        return false;
-    }
-     public void pujarNivell() {
-        niv++;
-        // Sumar un punt addicional a les estadístiques
         calculaEstadistiquesSecundaries();
     }
-    
-        public void guanyaCombat(int pexGuanyats) {
-        pex += pexGuanyats;
-        
-        if (pex >= calcularNivell(niv + 1)) {
-            pujarNivell();
+
+  
+
+    public int getPexSiguienteNivel() {
+        switch (this.nivell) {
+            case 0:
+                return 100;
+            case 1:
+                return 200;
+            case 2:
+                return 500;
+            case 3:
+                return 1000;
+            case 4:
+                return 2000;
+            default:
+                return Integer.MAX_VALUE;
         }
-    }          
-   }
+    }
+
+    public boolean atacPAReduida(Dau... daus) {
+        int sum = 0;
+        for (Dau dau : daus) {
+            sum += dau.llencar();
+        }
+
+        int paReducida = getPa() / 2;
+
+        return sum > paReducida;
+    }
+
+}
+   
 

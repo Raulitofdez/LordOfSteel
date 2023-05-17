@@ -13,4 +13,7 @@ public class MitjaOrdre extends Mitja implements Ordre{
         super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);
         
     }
+     public void restaurarPS() {
+        this.ps = (int) (this.ps * 1.10);
+    }
 }

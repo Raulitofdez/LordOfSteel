@@ -11,6 +11,18 @@ package lordofsteel;
    public class MaiaCaos extends Maia implements Caos {
    public MaiaCaos(String nom, int forca, int constitucio, int velocitat, int intelligencia, int sort, Arma arma){
         super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);      
-} 
 }
+   @Override
+       public boolean atacPAReduida(Dau... dados) {
+        int sum = 0;
+        for (Dau dau : dados) {
+            sum += dau.llencar();
+        }
+
+        int paReducida = getPa() / 2;
+        
+        return sum > paReducida;
+    }
+
+   }
 

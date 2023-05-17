@@ -51,10 +51,13 @@ public class LordsOfSteel {
         
         switch (opcio) {
             case 1:
+                afegirPersonatge(personatges);
                 break;
             case 2:
+                borrarPersonatge(personatges);
                 break;
             case 3:
+                editarPersonatge(personatges);
                 break;
             case 4:
                 iniciarCombat(personatges);
@@ -123,6 +126,37 @@ public class LordsOfSteel {
         Personatge aux = atacant;
         atacant  = defensor;
         defensor = aux;
+    }
+    public static void esborraPersonatge(Arraylist<personatge>personatges){
+         boolean[] seleccionats = new boolean[personatges.size()];
+        Personatge[] lluitadors = new Personatge[2];
+        //for (Personatge p : personatges)
+        for (int selec = 1; selec <= 2; selec++) {
+            for (int i = 0; i < personatges.size(); ++i) {
+                if (!seleccionats[i]) {
+                    String tipus = "";
+                    if (personatges.get(i) instanceof Nan)
+                        tipus = "Nan";
+                    else if (personatges.get(i) instanceof Huma)
+                        tipus = "Huma";
+                    else if (personatges.get(i) instanceof Mitja)
+                        tipus = "Mitja";
+                    else if (personatges.get(i) instanceof Maia)
+                        tipus = "Maia";
+
+                    System.out.printf("%d %s (%s)\n",(i+1),personatges.get(i).getNom(),
+                                                     tipus);
+                }            
+            }
+            System.out.print("\nTria un personatge " + selec + ": ");
+            int opcio = sc.nextInt();
+            seleccionats[opcio-1] = true;
+            lluitadors[selec-1] = personatges.get(opcio-1);
+            System.out.println("Personatge triat: " + 
+                              personatges.get(opcio-1).getNom());        
+        }
+        
+        
     }
     
 }
