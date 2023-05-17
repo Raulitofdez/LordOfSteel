@@ -26,7 +26,7 @@ package lordofsteel;
     //Nivell personatge
     protected int pex; // Punts d'experiència
     protected int niv; // Nivell
-    protected int calcularLlindarNivell(int nivell) {
+    protected int calcularNivell(int nivell) {
         switch (nivell) {
             case 1:
                 return 100;
@@ -39,7 +39,7 @@ package lordofsteel;
             case 5:
                 return 2000;
             default:
-                return 0; // Si no es troba un llindar per al nivell especificat, retorna 0 o gestiona l'error segons convingui
+                return 0; 
         }
     }
     // Arma
@@ -193,8 +193,7 @@ package lordofsteel;
         public void guanyaCombat(int pexGuanyats) {
         pex += pexGuanyats;
         
-        // Comprovar si es supera el llindar del nivell actual
-        if (pex >= calcularLlindarNivell(getNiv() + 1)) {
+        if (pex >= calcularNivell(niv + 1)) {
             pujarNivell();
         }
     }          

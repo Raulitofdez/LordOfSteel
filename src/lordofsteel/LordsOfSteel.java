@@ -108,12 +108,14 @@ public class LordsOfSteel {
         Dau dau3 = new Dau();
         
         int valor = dau1.llencar() + dau2.llencar() + dau3.llencar();
-        //System.out.println("Valor daus: " + valor);
+        System.out.println("Valor daus: " + valor);
         
         if (valor <= atacant.getPa()) { // Atacant ataca
             valor = dau1.llencar() + dau2.llencar() + dau3.llencar();
+            System.out.println("Atacant ataca ");
             if (valor > defensor.getPe()) { // No aconsegueix esquivar
                 defensor.setPs(defensor.getPs() - atacant.getPd());
+                System.out.println("Defensor no consigueix esquivar");
             }
         }
         
