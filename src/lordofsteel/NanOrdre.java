@@ -9,9 +9,10 @@ package lordofsteel;
  * @author raulf
  */
 public class NanOrdre  extends Nan implements Ordre{
-    public NanOrdre(String nom, int forca, int constitucio, int velocitat, int intelligencia, int sort, Arma arma){
-        super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);
-        
+     public NanOrdre(String nom, int forca, int constitucio, int velocitat,
+            int intelligencia, int sort, int nivell, Arma arma) {
+
+        super(nom, forca, constitucio, velocitat, intelligencia, sort, nivell, arma);
     }
      public void restaurarPS() {
         this.ps = (int) (this.ps * 1.10);

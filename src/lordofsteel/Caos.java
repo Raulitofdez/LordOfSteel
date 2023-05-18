@@ -9,5 +9,7 @@ package lordofsteel;
  * @author raulf
  */
 public interface Caos {
-    public boolean AtacPaReduida(Dau ... d);
+
+    public boolean atacPAReduida(Dau... d);
+
 }

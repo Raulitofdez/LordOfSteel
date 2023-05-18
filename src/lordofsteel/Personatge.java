@@ -26,22 +26,8 @@ package lordofsteel;
     //Nivell personatge
     protected int pex; // Punts d'experiència
     protected int nivell; // Nivell
-    protected int calcularNivell(int nivell) {
-        switch (nivell) {
-            case 1:
-                return 100;
-            case 2:
-                return 200;
-            case 3:
-                return 500;
-            case 4:
-                return 1000;
-            case 5:
-                return 2000;
-            default:
-                return 0; 
-        }
-    }
+    
+    
     // Arma
     protected Arma arma;
 
@@ -49,7 +35,7 @@ package lordofsteel;
     protected String nom;
     
     public Personatge(String nom, int forca, int constitucio, int velocitat,
-                      int intelligencia, int sort, Arma arma) {
+                      int intelligencia, int sort,int nivell, Arma arma) {
         this.nom           = nom;
         this.forca         = forca;
         this.constitucio   = constitucio;
@@ -57,6 +43,7 @@ package lordofsteel;
         this.intelligencia = intelligencia;
         this.sort          = sort;
         this.arma          = arma;
+        this.nivell        = nivell;
         calculaEstadistiquesSecundaries();
     }
                       

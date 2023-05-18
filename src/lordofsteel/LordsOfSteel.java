@@ -9,22 +9,21 @@ import java.util.Scanner;
  * @author raulf
  */
 public class LordsOfSteel {
-
+    //Titol Submenus;
+    
+    protected static String titol;
+    
+    //Entrada
     static Scanner sc = new Scanner(System.in);
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
    
-        Nan n1 = new Nan("Tirion",8,6, 13,16,16,new Arma("Daga"));        
-        Huma h1 = new Huma("Luis",13,16,6,10,6,new Arma("Espasa"));
-        Mitja mi1 = new Mitja("Frodo",9,7,7,15,16,new Arma("Martell"));
-        Maia ma1 = new Maia("Nil",7,9, 12,15,17,new Arma("Daga"));
+        Nan n1 = new NanOrdre("Tirion", 9, 6, 13, 16, 16, 0, new Arma("Daga"));
+        Huma h1 = new HumaOrdre("Luis", 15, 18, 8, 12, 7, 0, new Arma("Espasa"));
+        Mitja mi1 = new MitjaCaos("Frodo", 15, 7, 7, 15, 16, 0, new Arma("Martell"));
+        Maia ma1 = new MaiaCaos("Nilf", 7, 9, 12, 15, 17, 0, new Arma("Daga"));
+
         
-        /*Personatge[] personatges = new Personatge[4];
-        personatges[0] = n1;
-        personatges[1] = h1;*/
         ArrayList<Personatge> personatges = new ArrayList<Personatge>();
         personatges.add(n1);
         personatges.add(h1);
@@ -33,26 +32,62 @@ public class LordsOfSteel {
                 
         
         /* Menú principal */
-        System.out.println("");
-        System.out.println("** MENÚ PRINCIPAL **");
-        System.out.println("1.- Afegir personatge");
-        System.out.println("2.- Esborrar personatge");
-        System.out.println("3.- Editar personatge");
-        System.out.println("4.- Iniciar combat");
-        System.out.println("5.- Sortir");
-        System.out.println("");
-        System.out.print("Tria opció [1-5]: ");
-        
-        String entrada = sc.nextLine();
+       System.out.println("Pulsa enter per continuar: ");
+        sc.nextLine();
+
+        boolean sortir = false;
+
+        while (!sortir) {
+            System.out.println("");
+            System.out.println("+-------------------------+");
+            System.out.println("|                         |");
+            System.out.println("|     Menu Principal      |");
+            System.out.println("|                         |");
+            System.out.println("| (1) Crear Personatge    |");
+            System.out.println("| (2) Esborrar Personatge |");
+            System.out.println("| (3) Editar  Personatge  |");
+            System.out.println("| (4) Iniciar combat      |");
+            System.out.println("| (5) Sortir              |");
+            System.out.println("|                         |");
+            System.out.println("+-------------------------+");
+            System.out.println("");
+
+            System.out.print("Seleccionar: ");
+            int opcio = verificarMenu(sc.nextLine(), 5);
+            switch (opcio) {
+                case 1:
+                    crearPersonatge(personatges);
+                    break;
+                case 2:
+                    esborrarPersonatge(personatges);
+                    break;
+                case 3:
+                    editarPersonatge(personatges);
+                    break;
+                case 4:
+                    System.out.println("");
+                    iniciarCombat(personatges);
+                    break;
+                case 5:
+                    sortir = true;
+                    System.out.println("");
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
     }
         public static void crearPersonatge(ArrayList<Personatge> personatges){
+        titol = "(1) Crear   ";
         boolean crearPersonatge = false;
-        String gameMode = "(1) Crear   ";
-        mostrarMenu(gameMode);
+        
+        mostrarMenu(titol);
+        
         int crearSortir = verificarMenu(sc.nextLine(), 2);
         crearPersonatge = sortir(crearSortir);
+        
         while (!crearPersonatge) {
-
             System.out.println("+-------------------------+");
             System.out.println("|                         |");
             System.out.println("|         |Clase|         |");
@@ -68,7 +103,7 @@ public class LordsOfSteel {
             int puntsRestants = 60;
             String nomArma;
             System.out.print("Selecció: ");
-            int opcio = verificarMenu(sc.nextLine(), 4);;
+            int opcio = verificarMenu(sc.nextLine(), 4);
             System.out.println("");
 
             System.out.print("Introdueix el nom del personatge: ");
@@ -129,7 +164,7 @@ public class LordsOfSteel {
                     throw new AssertionError();
             }
             System.out.println("");
-            System.out.println("Selecciona una pasiva: ");
+            System.out.println("Selecciona una devoció: ");
             System.out.println("");
             System.out.println("1. Ordre (Robatori de vida)");
             System.out.println("2. Caos (Atac extra)");
@@ -139,7 +174,7 @@ public class LordsOfSteel {
             if (opcio == 1 && opcio2 == 1) {
                 HumaOrdre nouHumaOrdre = new HumaOrdre(nom, forca, constitucio, velocitat, intelligencia, sort, 0, new Arma(nomArma));
                 personatges.add(nouHumaOrdre);
-                System.out.println("Personatge creat: "  + nouHumaOrdre.getNom()  + " (Ordre)" ;
+                System.out.println("Personatge creat: "  + nouHumaOrdre.getNom()  + " (Ordre)" );
             } else if (opcio == 1 && opcio2 == 2) {
                 HumaCaos nouHumaCaos = new HumaCaos(nom, forca, constitucio, velocitat, intelligencia, sort, 0, new Arma(nomArma));
                 personatges.add(nouHumaCaos);
@@ -169,7 +204,7 @@ public class LordsOfSteel {
                 personatges.add(nouMitjaCaos);
                 System.out.println("Personatge creat: " +  nouMitjaCaos.getNom() + " (Caos)" );
             }
-            mostrarMenu(gameMode);
+            mostrarMenu(titol);
             crearSortir = verificarMenu(sc.nextLine(), 2);
             crearPersonatge = sortir(crearSortir);
 
@@ -178,16 +213,15 @@ public class LordsOfSteel {
     }
 
     public static void esborrarPersonatge(ArrayList<Personatge> personatges) {
-
+        titol = "(1) Esborrar";
         boolean borrarPersonatge = false;
-        String gameMode = "(1) Esborrar";
-        mostrarMenu(gameMode);
+        mostrarMenu(titol);
+        
         int crearSortir = verificarMenu(sc.nextLine(), 2);
         borrarPersonatge = sortir(crearSortir);
 
         System.out.println("");
         while (!borrarPersonatge) {
-
             mostrarPersonatges(personatges);
             if (personatges.size() <= 0) {
                 System.out.println( "No hi ha personatges a esborrar!!" );
@@ -202,9 +236,9 @@ public class LordsOfSteel {
                 Personatge personatgeEsborrat = personatges.remove(opcio);
                 System.out.println("Personatge " + personatgeEsborrat.getNom() + " esborrat" +  " amb èxit.");
             } else {
-                System.out.println("El personatge proporcionat és invàlid. Si us plau, selecciona un altre vàlid.");
+                System.out.println("El personatge no existeix. Selecciona una altre opció");
             }
-            mostrarMenu(gameMode);
+            mostrarMenu(titol);
             crearSortir = verificarMenu(sc.nextLine(), 2);
             borrarPersonatge = sortir(crearSortir);
         }
@@ -212,9 +246,11 @@ public class LordsOfSteel {
     }
 
     public static void editarPersonatge(ArrayList<Personatge> personatges) {
+        titol = "(1) Editar  ";
         boolean editarPersonatge = false;
-        String gameMode = "(1) Editar  ";
-        mostrarMenu(gameMode);
+        
+        mostrarMenu(titol);
+
         int crearSortir = verificarMenu(sc.nextLine(), 2);
         System.out.println("");
         editarPersonatge = sortir(crearSortir);
@@ -239,7 +275,7 @@ public class LordsOfSteel {
                     puntsRestants = 60;
                 }
 
-                // Mostrar estadísticas actuales
+                //Stats actuals
                 System.out.println("Estadístiques actuals:");
                 System.out.println("Força: " + personatge.getForca());
                 System.out.println("Constitucio: " + personatge.getConstitucio());
@@ -248,7 +284,7 @@ public class LordsOfSteel {
                 System.out.println("Sort: " + personatge.getSort());
                 System.out.println("Punts disponibles per repartir: " + puntsRestants);
 
-                // Solicitar las nuevas estadísticas
+                //Noves stats
                 System.out.print("Nova força (màxim " + puntsRestants + " punts disponibles): ");
                 int novaForca = verificarMenu(sc.nextLine(), puntsRestants);
 
@@ -274,7 +310,7 @@ public class LordsOfSteel {
 
                 puntsRestants -= novaSort;
 
-                // Actualitzar las estadísticas del personaje
+                // Actualitzar stats
                 personatge.setForca(novaForca);
                 personatge.setConstitucio(novaConstitucio);
                 personatge.setVelocitat(novaVelocitat);
@@ -282,32 +318,33 @@ public class LordsOfSteel {
                 personatge.setSort(novaSort);
 
                 System.out.println("");
-                System.out.println("Les estadístiques del personatge s'han actualitzat amb" + " èxit.");
+                System.out.println("Les estadístiques del personatge s'han actualitzat amb èxit.");
                 if (puntsRestants > 0) {
                     System.out.println("");
-                    System.out.println("Recorda que et falten: " + puntsRestants + " punt(s) per asignar");
+                    System.out.println("Et falten: " + puntsRestants + " punt(s) per asignar");
                     System.out.println("");
                 }
             } else {
-                System.out.println("Opció no vàlida. Si us plau, selecciona un personatge vàlid.");
+                System.out.println("Opció incorrecta. Si us plau, selecciona un personatge vàlid.");
             }
-            mostrarMenu(gameMode);
+            mostrarMenu(titol);
             crearSortir = verificarMenu(sc.nextLine(), 2);
             editarPersonatge = sortir(crearSortir);
         }
     }
 
     public static void iniciarCombat(ArrayList<Personatge> personatges) {
-
+        titol = "(1) Combat  ";
         boolean combat = false;
-        String gameMode = "(1) Combat  ";
-        mostrarMenu(gameMode);
+        
+        mostrarMenu(titol);
+        
         int crearSortir = verificarMenu(sc.nextLine(), 2);
         combat = sortir(crearSortir);
 
         if (personatges.size() < 2) {
             System.out.println("");
-            System.out.println("No hi ha personatges suficients, minim 2!!");
+            System.out.println("No hi ha personatges suficients(minim 2)");
             combat = true;
 
         }
@@ -317,7 +354,6 @@ public class LordsOfSteel {
             boolean[] seleccionats = new boolean[personatges.size()];
             Personatge[] lluitador = new Personatge[2];
 
-            //  for (Personatge p : personatges)
             for (int selec = 1; selec <= 2; selec++) {
                 boolean personatgeRepetit = true;
                 while (personatgeRepetit) {
@@ -399,7 +435,7 @@ public class LordsOfSteel {
 
                     if (valor > defensor.getPe()) {
                         defensor.setPs(defensor.getPs() - atacant.getPd());
-                        System.out.println(defensor.getNom() + " ha sigut atacat, ha perdut: " + atacant.getPd());
+                        System.out.println(defensor.getNom() + " ha rebut l'atac amb èxit, ha perdut: " + atacant.getPd()+"Punts de dany");
                         System.out.println("Vida restant: " + defensor.getPs());
                         if (atacant instanceof Ordre) {
                             atacant.restauraPS();
@@ -414,7 +450,7 @@ public class LordsOfSteel {
                             boolean atacarDeNou = atacant.atacPAReduida(dau1, dau2, dau3);
                             if (atacarDeNou) {
                                 defensor.setPs(defensor.getPs() - atacant.getPd());
-                                System.out.println(defensor.getNom() + " ha sigut atacat de nou, ha perdut: " + atacant.getPd());
+                                System.out.println(defensor.getNom() + " ha rebut l'atac extra amb éxit, ha perdut: " + atacant.getPd()+"Punts de dany");
                                 System.out.println("Vida restant: " + defensor.getPs());
                             } else {
                                 System.out.println("Ha fallat l'atac extra ");
@@ -455,7 +491,7 @@ public class LordsOfSteel {
             guanyador.setPex(guanyador.getPex() + perdedor.getPs());
             if (guanyador.getPex() >= guanyador.getPexSiguienteNivel()) {
                 guanyador.subirDeNivel();
-                System.out.println("Felicitats " + guanyador.getNom() + " ha pujat de nivell!! " + "Lvl: " + guanyador.getNivell());
+                System.out.println("Felicitats " + guanyador.getNom() + "  puja de nivell! " + "Lvl: " + guanyador.getNivell());
                 System.out.println("");
                 System.out.println("Noves estadistiques:");
                 System.out.println("Força: " + guanyador.getForca());
@@ -478,7 +514,7 @@ public class LordsOfSteel {
 
             if (opcio.equalsIgnoreCase("n")) {
                 combat = true;
-                System.out.println("Tornant al menú principal...");
+                System.out.println("Tornant al menu...");
             }
 
         }

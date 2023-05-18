@@ -9,10 +9,14 @@ package lordofsteel;
  * @author raulf
  */
 public class NanCaos extends Nan implements Caos {
-   public NanCaos(String nom, int forca, int constitucio, int velocitat, int intelligencia, int sort, Arma arma){
-        super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);      
-}
-  @Override
+    public NanCaos(String nom, int forca, int constitucio, int velocitat,
+            int intelligencia, int sort, int nivell, Arma arma) {
+
+        super(nom, forca, constitucio, velocitat, intelligencia, sort, nivell, arma);
+    }
+
+   
+    @Override
 public boolean atacPAReduida(Dau... daus) {
         int sum = 0;
         for (Dau dau : daus) {

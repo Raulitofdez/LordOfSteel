@@ -10,11 +10,10 @@ package lordofsteel;
  */
     public class Huma extends Personatge {
     
-    public Huma(String nom,int forca, int constitucio, int velocitat,
-                int intelligencia, int sort, Arma arma) {
+    public Huma(String nom, int forca, int constitucio, int velocitat,
+            int intelligencia, int sort, int nivell, Arma arma) {
 
-        super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);
-        
+        super(nom, forca, constitucio, velocitat, intelligencia, sort, nivell, arma);
     }
 
     @Override

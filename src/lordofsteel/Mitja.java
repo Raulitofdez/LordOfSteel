@@ -10,10 +10,10 @@ package lordofsteel;
  */
     public class Mitja extends Personatge {
     
-    public Mitja(String nom,int forca, int constitucio, int velocitat,
-                 int intelligencia, int sort, Arma arma) {
+     public Mitja(String nom, int forca, int constitucio, int velocitat,
+            int intelligencia, int sort, int nivell, Arma arma) {
 
-        super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);
+        super(nom, forca, constitucio, velocitat, intelligencia, sort, nivell, arma);
     }
     
 

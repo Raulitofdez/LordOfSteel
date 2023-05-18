@@ -10,9 +10,11 @@ package lordofsteel;
  */
  
    public class HumaCaos extends Huma implements Caos {
-   public HumaCaos(String nom, int forca, int constitucio, int velocitat, int intelligencia, int sort, Arma arma){
-        super(nom,forca,constitucio,velocitat,intelligencia,sort,arma);      
-}
+   public HumaCaos(String nom, int forca, int constitucio, int velocitat,
+            int intelligencia, int sort, int nivell, Arma arma) {
+
+        super(nom, forca, constitucio, velocitat, intelligencia, sort, nivell, arma);
+    }
     @Override
     public boolean atacPAReduida(Dau... dados) {
         int sum = 0;
@@ -25,7 +27,7 @@ package lordofsteel;
         return sum > paReducida;
     }
 
-    @Override
+   
     public boolean AtacPaReduida(Dau... d) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
