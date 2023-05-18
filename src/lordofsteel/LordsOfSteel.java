@@ -447,22 +447,26 @@ public class LordsOfSteel {
                         defensor.setPs(defensor.getPs() - atacant.getPd());
                         System.out.println(defensor.getNom() + " ha rebut l'atac amb èxit, ha perdut: " + atacant.getPd()+" Punts de dany");
                         if (atacant instanceof Ordre) {
-                            atacant.restauraPS();
+                             
                             System.out.println("S'ha robat un 10% de vida a l'enemic");
-                            if (lluitador[0].getPs() > vida1) {
+                            if (lluitador[0].getPs() >= vida1) {
                                 lluitador[0].setPs(vida1);
-                            } else if (lluitador[1].getPs() > vida2) {
+                            } else if (lluitador[1].getPs() >= vida2) {
                                 lluitador[1].setPs(vida2);
+                            }else{
+                                atacant.restauraPS();
                             }
+                            
                         }
-                        if (atacant instanceof Caos) {
-                            boolean atacarDeNou = atacant.atacPAReduida(dau1, dau2, dau3);
-                            if (atacarDeNou) {
-                                defensor.setPs(defensor.getPs() - atacant.getPd());
-                                System.out.println(defensor.getNom() + " ha rebut l'atac extra amb éxit, ha perdut: " + atacant.getPd()+" Punts de dany");
+                       
+                     if (defensor instanceof Caos) {
+                            boolean contraAtac = defensor.atacPAReduida(dau1, dau2, dau3);
+                            if (contraAtac) {
+                                atacant.setPs(atacant.getPs() - defensor.getPd());
+                                System.out.println(atacant.getNom() + " ha rebut un contraatac i ha perdut: " + defensor.getPd()+" Punts de dany");
                             
                             } else {
-                                System.out.println("Ha fallat l'atac extra ");
+                                System.out.println("Ha fallat el contraatac ");
                             }
                         }
 
@@ -482,9 +486,9 @@ public class LordsOfSteel {
                 System.out.println("*****************************");
                 System.out.println("");
                 
-         
+                
                 ronda++;
-
+                
                 // Intercambi rols
                 Personatge aux = atacant;
                 atacant = defensor;

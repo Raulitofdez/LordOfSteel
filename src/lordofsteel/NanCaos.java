@@ -25,6 +25,6 @@ public boolean atacPAReduida(Dau... daus) {
 
         int paReducida = getPa() / 2;
 
-        return sum > paReducida;
+        return sum < paReducida;
     }
 }
